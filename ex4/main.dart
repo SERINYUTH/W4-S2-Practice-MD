@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-// ── Weather Enum ──────────────────────────────────────────────────────────────
 enum WeatherType {
   sunny(imagePath: 'assets/ex4/sunny.png'),
   cloudy(imagePath: 'assets/ex4/cloudy.png'),
@@ -11,7 +10,6 @@ enum WeatherType {
   const WeatherType({required this.imagePath});
 }
 
-// ── WeatherCard Widget ────────────────────────────────────────────────────────
 class WeatherCard extends StatelessWidget {
   final String city;
   final int currentTemp;
@@ -33,55 +31,61 @@ class WeatherCard extends StatelessWidget {
     return PhysicalModel(
       color: Colors.transparent,
       borderRadius: BorderRadius.circular(20),
-      elevation: 8,
-      shadowColor: Colors.black45,
       child: Container(
         margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
         padding: const EdgeInsets.all(20),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20),
           gradient: const LinearGradient(
-            colors: [Color(0xFF4A90E2), Color(0xFF9B59B6)],
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
+            colors: [Colors.blue, Colors.purple],
           ),
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            // Left side: city name + temperatures
-            Column(
+            Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  city,
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                  ),
+                CircleAvatar(
+                  radius: 30,
+                  backgroundImage: AssetImage(weatherType.imagePath),
                 ),
-                const SizedBox(height: 8),
-                Text(
-                  '$currentTemp°C',
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 36,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                const SizedBox(height: 4),
-                Text(
-                  'Min: $minTemp°C   Max: $maxTemp°C',
-                  style: const TextStyle(color: Colors.white70),
+                const SizedBox(width: 10,),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      city,
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    const SizedBox(height: 4),
+                    Text(
+                      'Min: $maxTemp°C',
+                      style: const TextStyle(color: Colors.white70),
+                    ),
+                    const SizedBox(height: 2),
+                    Text(
+                      'Min: $minTemp°C',
+                      style: const TextStyle(color: Colors.white70),
+                    ),
+
+                    const SizedBox(height: 20,),
+                  ],
                 ),
               ],
             ),
-            // Right side: weather image in a circle
-            CircleAvatar(
-              radius: 40,
-              backgroundColor: Colors.white24,
-              child: Image.asset(weatherType.imagePath, width: 50, height: 50),
+
+            Text(
+              '$currentTemp°C',
+              style: const TextStyle(
+                color: Colors.white,
+                fontSize: 32,
+                fontWeight: FontWeight.bold,
+              ),
             ),
           ],
         ),
@@ -90,7 +94,6 @@ class WeatherCard extends StatelessWidget {
   }
 }
 
-// ── Main App ──────────────────────────────────────────────────────────────────
 void main() {
   runApp(const MyApp());
 }
@@ -103,7 +106,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       home: Scaffold(
         backgroundColor: const Color(0xFFF0F4FF),
-        appBar: AppBar(title: const Text('Ex 4 – Weather Forecast')),
+        appBar: AppBar(title: const Text('Weather Forecast')),
         body: ListView(
           padding: const EdgeInsets.symmetric(vertical: 12),
           children: const [

@@ -35,19 +35,27 @@ class ProductCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      child: Column(
-        children: [
-          Image.asset(product.imagePath, height: 50),
-          SizedBox(height: 8),
-          Text(
-            product.title,
-            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+    return SizedBox(
+      width: 500,
+      child: Card(
+        color: Colors.white,
+        child: Padding(
+          padding: EdgeInsets.all(10),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Image.asset(product.imagePath, height: 50),
+              SizedBox(height: 8),
+              Text(
+                product.title,
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              ),
+              SizedBox(height: 4),
+              Text(product.description),
+              SizedBox(height: 8),
+            ],
           ),
-          SizedBox(height: 4),
-          Text(product.description),
-          SizedBox(height: 8),
-        ],
+        ),
       ),
     );
   }
@@ -64,14 +72,12 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        appBar: AppBar(title: const Text('Ex 3 – Products')),
-        // Scaffold → body → Padding
+        backgroundColor: Colors.blue,
+        appBar: AppBar(title: const Text('Products')),
         body: Padding(
           padding: const EdgeInsets.all(16),
-          // Padding → child → Column
           child: Column(
             children: [
-              // Column → child → Card (one per product)
               ProductCard(product: Product.dart),
               ProductCard(product: Product.flutter),
               ProductCard(product: Product.firebase),
